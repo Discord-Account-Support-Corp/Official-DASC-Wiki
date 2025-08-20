@@ -2,34 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="2;url=https://discord-account-support-corporation.fandom.com">
   <link rel="manifest" href="manifest.json">
-  <title>Loading Wiki...</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: #f9f9f9;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 15px;
-      background: #5865F2;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-  </style>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="DASC Wiki">
+  <title>Discord Account Support Wiki</title>
 </head>
 <body>
-  <h2>Redirecting you to the Discord Account Support Wiki…</h2>
-  <p>If you are not redirected automatically, click the button below:</p>
-  <a href="https://discord-account-support-corporation.fandom.com">Go to Wiki</a>
+  <script>
+    // If opened in browser, redirect
+    if (window.matchMedia('(display-mode: browser)').matches) {
+      window.location.href = "https://discord-account-support-corporation.fandom.com";
+    }
+    // If installed as PWA, open directly inside app shell
+    else {
+      window.location.replace("https://discord-account-support-corporation.fandom.com");
+    }
+  </script>
 </body>
 </html>
