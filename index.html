@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="DASC Wiki">
+  <meta charset="UTF-8" />
   <title>Discord Account Support Wiki</title>
+
+  <!-- PWA basics -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#5865F2" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+
+  <!-- Instant redirect to your wiki -->
+  <meta http-equiv="refresh"
+        content="0;url=https://discord-account-support-corporation.fandom.com" />
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      color: #555;
+      background: #f9f9f9;
+    }
+    a {
+      margin-top: 15px;
+      padding: 8px 12px;
+      background: #5865F2;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <script>
-    // If opened in browser, redirect
-    if (window.matchMedia('(display-mode: browser)').matches) {
-      window.location.href = "https://discord-account-support-corporation.fandom.com";
-    }
-    // If installed as PWA, open directly inside app shell
-    else {
-      window.location.replace("https://discord-account-support-corporation.fandom.com");
-    }
-  </script>
+  Redirecting to the Discord Account Support Wiki…<br>
+  <a href="https://discord-account-support-corporation.fandom.com">
+    Click here if not redirected
+  </a>
 </body>
 </html>
