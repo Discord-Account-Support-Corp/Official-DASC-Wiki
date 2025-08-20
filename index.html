@@ -10,10 +10,6 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
 
-  <!-- Instant redirect to your wiki -->
-  <meta http-equiv="refresh"
-        content="0;url=https://discord-account-support-corporation.fandom.com" />
-
   <style>
     html, body {
       margin: 0;
@@ -25,6 +21,7 @@
       font-family: sans-serif;
       color: #555;
       background: #f9f9f9;
+      text-align: center;
     }
     a {
       margin-top: 15px;
@@ -37,9 +34,23 @@
   </style>
 </head>
 <body>
-  Redirecting to the Discord Account Support Wiki…<br>
-  <a href="https://discord-account-support-corporation.fandom.com">
-    Click here if not redirected
-  </a>
+  <h2>Opening the Discord Account Support Wiki…</h2>
+  <p>If nothing happens automatically, click the button below:</p>
+  <a href="https://discord-account-support-corporation.fandom.com">Open Wiki</a>
+
+  <script>
+    const wikiURL = "https://discord-account-support-corporation.fandom.com";
+
+    // Detect if app is installed as PWA
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      // Already a PWA → open instantly
+      window.location.href = wikiURL;
+    } else {
+      // Not installed → wait 3 seconds before redirect
+      setTimeout(() => {
+        window.location.href = wikiURL;
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
