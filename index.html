@@ -23,6 +23,11 @@
       background: #f9f9f9;
       text-align: center;
     }
+    #countdown {
+      font-size: 1.2em;
+      margin: 10px 0;
+      color: #333;
+    }
     a {
       margin-top: 15px;
       padding: 8px 12px;
@@ -36,20 +41,43 @@
 <body>
   <h2>Discord Account Support Wiki</h2>
   <p id="message"></p>
-  <a id="openWiki" href="https://discord-account-support-corporation.fandom.com">
-    Open Wiki
+  <p id="countdown"></p>
+  <a id="openWiki" href="https://discord-account-support-corporation.fandom.com" style="display:none;">
+    Open Wiki Manually
   </a>
 
   <script>
     const wikiURL = "https://discord-account-support-corporation.fandom.com";
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      // If launched as a PWA → go straight in
-      window.location.href = wikiURL;
+    const isInStandaloneMode =
+      window.matchMedia('(display-mode: standalone)').matches || 
+      (window.navigator.standalone === true); // iOS Safari
+
+    if (isInStandaloneMode) {
+      // Installed PWA → start countdown
+      document.getElementById("message").innerText = "Redirecting in 90 seconds...";
+      let seconds = 90;
+      const countdownEl = document.getElementById("countdown");
+      countdownEl.innerText = `Redirecting in ${seconds} seconds...`;
+
+      const interval = setInterval(() => {
+        seconds--;
+        countdownEl.innerText = `Redirecting in ${seconds} seconds...`;
+
+        if (seconds <= 0) {
+          clearInterval(interval);
+          window.location.href = wikiURL;
+        }
+      }, 1000);
+
+      // Show fallback button in case redirect fails
+      document.getElementById("openWiki").style.display = "inline-block";
+
     } else {
-      // If opened in Safari/Chrome → show instructions instead of auto-redirect
+      // In Safari/Chrome → no redirect, just show instructions
       document.getElementById("message").innerText =
-        "To install: Tap Share → Add to Home Screen. Or open directly:";
+        "To install: Tap Share → Add to Home Screen. Once installed, the app will redirect automatically.";
+      document.getElementById("openWiki").style.display = "inline-block";
     }
   </script>
 </body>
