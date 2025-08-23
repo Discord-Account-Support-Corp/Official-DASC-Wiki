@@ -34,22 +34,22 @@
   </style>
 </head>
 <body>
-  <h2>Opening the Discord Account Support Wiki…</h2>
-  <p>If nothing happens automatically, click the button below:</p>
-  <a href="https://discord-account-support-corporation.fandom.com">Open Wiki</a>
+  <h2>Discord Account Support Wiki</h2>
+  <p id="message"></p>
+  <a id="openWiki" href="https://discord-account-support-corporation.fandom.com">
+    Open Wiki
+  </a>
 
   <script>
     const wikiURL = "https://discord-account-support-corporation.fandom.com";
 
-    // Detect if app is installed as PWA
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      // Already a PWA → open instantly
+      // If launched as a PWA → go straight in
       window.location.href = wikiURL;
     } else {
-      // Not installed → wait 3 seconds before redirect
-      setTimeout(() => {
-        window.location.href = wikiURL;
-      }, 3000);
+      // If opened in Safari/Chrome → show instructions instead of auto-redirect
+      document.getElementById("message").innerText =
+        "To install: Tap Share → Add to Home Screen. Or open directly:";
     }
   </script>
 </body>
