@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#5865F2" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icons/icon-192.png" />
 
   <style>
     html, body {
@@ -43,41 +42,43 @@
   <p id="message"></p>
   <p id="countdown"></p>
   <a id="openWiki" href="https://discord-account-support-corporation.fandom.com" style="display:none;">
-    Open Wiki Manually
+    Open Wiki Now
   </a>
 
   <script>
     const wikiURL = "https://discord-account-support-corporation.fandom.com";
+    const countdownEl = document.getElementById("countdown");
+    const openWikiBtn = document.getElementById("openWiki");
 
-    const isInStandaloneMode =
-      window.matchMedia('(display-mode: standalone)').matches || 
-      (window.navigator.standalone === true); // iOS Safari
+    const isPWA = window.matchMedia('(display-mode: standalone)').matches || 
+                  (window.navigator.standalone === true); // iOS
 
-    if (isInStandaloneMode) {
-      // Installed PWA → start countdown
+    if (isPWA) {
       document.getElementById("message").innerText = "Redirecting in 90 seconds...";
-      let seconds = 90;
-      const countdownEl = document.getElementById("countdown");
-      countdownEl.innerText = `Redirecting in ${seconds} seconds...`;
+      openWikiBtn.style.display = "inline-block";
 
+      // Prevent accidental back navigation
+      history.pushState(null, null, location.href);
+      window.addEventListener('popstate', function () {
+        history.pushState(null, null, location.href);
+      });
+
+      // Start countdown
+      let seconds = 90;
+      countdownEl.innerText = `Redirecting in ${seconds} seconds...`;
       const interval = setInterval(() => {
         seconds--;
         countdownEl.innerText = `Redirecting in ${seconds} seconds...`;
-
         if (seconds <= 0) {
           clearInterval(interval);
           window.location.href = wikiURL;
         }
       }, 1000);
 
-      // Show fallback button in case redirect fails
-      document.getElementById("openWiki").style.display = "inline-block";
-
     } else {
-      // In Safari/Chrome → no redirect, just show instructions
       document.getElementById("message").innerText =
         "To install: Tap Share → Add to Home Screen. Once installed, the app will redirect automatically.";
-      document.getElementById("openWiki").style.display = "inline-block";
+      openWikiBtn.style.display = "inline-block";
     }
   </script>
 </body>
